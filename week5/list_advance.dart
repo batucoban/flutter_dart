@@ -1,3 +1,5 @@
+import '../week4/model/user_model.dart';
+
 void main() {
   final model = CarModel(category: CarModels.bmw, name: 'bmw x5', money: 1500, isSecondHand: false);
 
@@ -39,6 +41,24 @@ void main() {
     print('bu araba yok.');
   }
 
+  final index = carItems.indexOf(newCar);
+  print(index);
+
+  carItems.add(CarModel(category: CarModels.mercedes, name: 'b3', money: 2000));
+
+  carItems.sort((first, second) => first.money.compareTo(second.money));
+  print(carItems);
+
+  final users = carItems.expand((element) => element.users).toList();
+  print(users);
+
+  final _mercedes = CarModel(category: CarModels.mercedes, name: 'b6', money: 3131);
+  carItems.add(_mercedes);
+  print(carItems);
+  carItems.remove(_mercedes);
+  carItems.removeWhere((element) => element.category == CarModels.bmw || element.money < 1600);
+  print(carItems);
+
 }
 
 // arabalar sinifi olacak
@@ -57,10 +77,23 @@ void main() {
 
 // elimde mercedes var mi ?
 
+// yeni gelen araba kacinci sirada
+
+// yeni araba aldim mercedes ekler misin
+
+// arabalari kucukten buyuge sirala
+
+// butun arabalari user yap
+
+// son ekleneni silelim
+
+// bmw olan ve 1600 den dusukleri silelim
+
 class CarModel {
   final CarModels category;
   final String name;
   final double money;
+  List<User> users;
   String? city;
   bool isSecondHand;
 
@@ -69,7 +102,8 @@ class CarModel {
     required this.name,
     required this.money,
     this.city,
-    this.isSecondHand = true
+    this.isSecondHand = true,
+    this.users = const []
   });
 
   @override
